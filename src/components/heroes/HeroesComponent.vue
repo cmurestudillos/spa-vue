@@ -15,10 +15,10 @@
           <div class="search-box">
             <div class="input-group">
               <input
+                v-model="searchTerm"
                 type="text"
                 class="form-control form-control-lg border-primary"
                 placeholder="Buscar superhéroe por nombre, biografía o casa..."
-                v-model="searchTerm"
                 @input="onSearch" />
             </div>
           </div>
@@ -26,18 +26,18 @@
           <!-- Filtros adicionales -->
           <div class="filters mt-3 d-flex justify-content-center gap-2">
             <button
-              @click="filterByCasa('all')"
-              :class="['btn', 'btn-sm', selectedCasa === 'all' ? 'btn-primary' : 'btn-outline-light']">
+              :class="['btn', 'btn-sm', selectedCasa === 'all' ? 'btn-primary' : 'btn-outline-light']"
+              @click="filterByCasa('all')">
               Todos
             </button>
             <button
-              @click="filterByCasa('Marvel')"
-              :class="['btn', 'btn-sm', selectedCasa === 'Marvel' ? 'btn-danger' : 'btn-outline-light']">
+              :class="['btn', 'btn-sm', selectedCasa === 'Marvel' ? 'btn-danger' : 'btn-outline-light']"
+              @click="filterByCasa('Marvel')">
               Marvel
             </button>
             <button
-              @click="filterByCasa('DC')"
-              :class="['btn', 'btn-sm', selectedCasa === 'DC' ? 'btn-primary' : 'btn-outline-light']">
+              :class="['btn', 'btn-sm', selectedCasa === 'DC' ? 'btn-primary' : 'btn-outline-light']"
+              @click="filterByCasa('DC')">
               DC
             </button>
           </div>
@@ -80,7 +80,6 @@ export default {
   methods: {
     onSearch() {
       // La búsqueda se maneja reactivamente a través de las props
-      console.log('Buscando:', this.searchTerm);
     },
 
     clearSearch() {
@@ -90,7 +89,6 @@ export default {
 
     filterByCasa(casa) {
       this.selectedCasa = casa;
-      console.log('Filtrando por casa:', casa);
     },
 
     updateFilteredCount(count) {

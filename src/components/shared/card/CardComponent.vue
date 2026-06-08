@@ -9,12 +9,12 @@
     <div v-else-if="error" class="alert alert-danger" role="alert">
       <h4 class="alert-heading">Error al cargar los héroes</h4>
       <p>{{ error }}</p>
-      <button @click="loadHeroes" class="btn btn-outline-danger"><i class="fas fa-sync-alt"></i> Reintentar</button>
+      <button class="btn btn-outline-danger" @click="loadHeroes"><i class="fas fa-sync-alt"></i> Reintentar</button>
     </div>
 
     <!-- Heroes grid -->
     <div v-else class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3">
-      <div class="col p-1" v-for="heroe in filteredHeroes" :key="heroe._id">
+      <div v-for="heroe in filteredHeroes" :key="heroe._id" class="col p-1">
         <div class="card h-100 shadow animated fadeIn slow m-2">
           <img
             :src="heroe.img ? heroe.img : '/assets/img/no-image.jpg'"
@@ -46,7 +46,7 @@
           {{ searchTerm ? `No hay héroes que coincidan con "${searchTerm}"` : 'No hay héroes en esta categoría' }}
           {{ casaFilter !== 'all' ? ` en ${casaFilter}` : '' }}
         </p>
-        <button @click="clearFilters" class="btn btn-outline-light mt-3">
+        <button class="btn btn-outline-light mt-3" @click="clearFilters">
           <i class="fas fa-refresh me-2"></i>Limpiar filtros
         </button>
       </div>
@@ -75,6 +75,7 @@ export default {
       default: 'all',
     },
   },
+  emits: ['update-count', 'clear-filters'],
   data() {
     return {
       heroes: [],
@@ -119,7 +120,6 @@ export default {
 
       try {
         this.heroes = await heroesService.getAllHeroes();
-        console.log('Heroes cargados:', this.heroes);
       } catch (error) {
         this.error = `Error al cargar los héroes: ${error.message}`;
         console.error('Error loading heroes:', error);

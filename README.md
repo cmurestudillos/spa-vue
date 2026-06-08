@@ -68,53 +68,46 @@ src/
 - **Vercel** - Plataforma de despliegue
 
 ### Herramientas de Desarrollo
-- **Vite** - Servidor de desarrollo y bundler
-- **ESLint** - Linter para código JavaScript
+- **Vite 5.4** - Servidor de desarrollo y bundler
+- **ESLint 9** - Linter flat config (0 errores)
+- **Prettier 3.6** - Formateo de código
+- **pnpm 11.5.2** - Gestión de paquetes
 - **Git** - Control de versiones
 
 ## 🚀 Instalación y Configuración
 
 ### Prerrequisitos
-- Node.js (v16 o superior)
-- npm o yarn
-- Git
+- Node.js (v18 o superior)
+- pnpm 11.5.2 (`npm install -g pnpm`)
 
 ### Instalación Local
 
 1. **Clonar el repositorio**
 ```bash
 git clone https://github.com/cmurestudillos/spa-vue.git
-cd heroes-app
+cd spa-vue
 ```
 
 2. **Instalar dependencias**
 ```bash
-npm install
-# o
-yarn install
+pnpm install
 ```
 
-3. **Configurar variables de entorno** (opcional)
+3. **Ejecutar en modo desarrollo**
 ```bash
-cp .env.example .env
-# Editar .env con tus configuraciones
+pnpm dev
 ```
 
-4. **Ejecutar en modo desarrollo**
-```bash
-npm run dev
-# o
-yarn dev
-```
+Abre `http://localhost:5173` en el navegador.
 
 ### Build para Producción
 
 ```bash
 # Crear build optimizado
-npm run build
+pnpm build
 
 # Previsualizar build localmente
-npm run preview
+pnpm preview
 ```
 
 ## 📚 Uso de la Aplicación
