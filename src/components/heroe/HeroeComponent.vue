@@ -9,15 +9,15 @@
     <div v-else-if="error" class="alert alert-danger" role="alert">
       <h4 class="alert-heading">Error al cargar el héroe</h4>
       <p>{{ error }}</p>
-      <button @click="getHeroe" class="btn btn-outline-danger me-2"><i class="fas fa-sync-alt"></i> Reintentar</button>
-      <button @click="volver" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Volver</button>
+      <button class="btn btn-outline-danger me-2" @click="getHeroe"><i class="fas fa-sync-alt"></i> Reintentar</button>
+      <button class="btn btn-secondary" @click="volver"><i class="fas fa-arrow-left"></i> Volver</button>
     </div>
 
     <!-- Hero not found -->
     <div v-else-if="!heroe && !loading" class="alert alert-warning" role="alert">
       <h4 class="alert-heading">Héroe no encontrado</h4>
       <p>No se encontró un héroe con el nombre "{{ $route.params.nombre }}".</p>
-      <button @click="volver" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Volver a la lista</button>
+      <button class="btn btn-primary" @click="volver"><i class="fas fa-arrow-left"></i> Volver a la lista</button>
     </div>
 
     <!-- Hero details -->
@@ -36,7 +36,7 @@
             class="img-fluid shadow rounded"
             :alt="heroe.nombre" />
           <br /><br />
-          <button @click="volver()" type="button" class="btn btn-4 btn-block w-100">
+          <button type="button" class="btn btn-4 btn-block w-100" @click="volver()">
             <i class="fas fa-arrow-left me-2"></i>Volver
           </button>
         </div>
@@ -88,15 +88,15 @@ export default {
       error: null,
     };
   },
-  async mounted() {
-    await this.getHeroe();
-  },
   watch: {
     // Recargar si cambia la ruta
     '$route.params.nombre': {
       handler: 'getHeroe',
       immediate: false,
     },
+  },
+  async mounted() {
+    await this.getHeroe();
   },
   methods: {
     async getHeroe() {
@@ -106,13 +106,10 @@ export default {
 
       try {
         const heroeNombre = this.$route.params.nombre;
-        console.log('Buscando héroe:', heroeNombre);
-
         const hero = await heroesService.getHeroByName(heroeNombre);
 
         if (hero) {
           this.heroe = hero;
-          console.log('Héroe encontrado:', this.heroe);
         } else {
           this.error = `No se encontró el héroe "${heroeNombre}"`;
         }
